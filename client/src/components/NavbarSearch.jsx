@@ -1,29 +1,16 @@
 import { addDays, format } from 'date-fns'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { PlacesAutocomplete } from './Map'
+import { SearchContext } from '../SearchContext'
 
-const NavbarSearch = ({windowWidth, setShowSearch}) => {
+const NavbarSearch = ({setShowSearch}) => {
     const navigate = useNavigate()
+    const {address,checkIn, checkOut, selected, 
+      guests, allInputValid,setAddress, setCheckIn,
+      setCheckOut,setSelected,setGuests,
+      setAllInputValid, addDaysToStateFormat} = useContext(SearchContext)
 
-    const [checkIn, setCheckIn] = useState('')
-    const [checkOut, setCheckOut] = useState('')
-    const [selected, setSelected] = useState({
-        lat:'',
-        lng: ''
-    })
-    const [guests, setGuests] = useState('')
-
-    const addDaysToStateFormat= (date, days) =>{
-        return format(addDays(new Date(date),days),'yyyy-MM-dd')
-    }
-
-
-    useEffect(()=>{
-        if(new Date(checkIn)>=new Date(checkOut)) setCheckOut(addDaysToStateFormat(checkIn,1))
-    },[checkIn])
-
-    
 
     const handleClose = (e)=>{
         if(e)e.preventDefault()
@@ -32,31 +19,31 @@ const NavbarSearch = ({windowWidth, setShowSearch}) => {
     
     const handleSearch = (e)=>{
         e.preventDefault()
-        const params = createSearchParams({
-            lat: selected.lat,
-            lng: selected.lng,
-            checkIn: checkIn,
-            checkOut: checkOut,
-            guests: guests
-        })
-        handleClose()
-        navigate(`/search?${params}`)
+        if(!selected.lat||!selected.lng||!checkIn||!checkOut||!guests||guests<1) {
+          setAllInputValid(false)
+        }
+        else{
+          setAllInputValid(true)
+          const params = createSearchParams({
+              lat: selected.lat,
+              lng: selected.lng,
+              checkIn: checkIn,
+              checkOut: checkOut,
+              guests: guests
+          })
+          handleClose()
+          navigate(`/search?${params}`)
+      }
     }
 
 
     return (
-    <>
-    
-    <form className='flex max-md:flex-col justify-center border gap-2 border-gray-300 rounded-2xl py-2 px-3 w-full shadow-lg animate-slide-down absolute md:static bg-white'>
-        {windowWidth<768&&<button onClick={handleClose}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-        </button>}
+    <div className='border border-gray-300 rounded-2xl w-full shadow-lg animate-slide-down absolute md:static bg-white py-2 px-3'>
+    <form className='flex max-md:flex-col justify-center gap-2 w-full'>
         <div className='flex max-md:flex-col w-full justify-around'>
           <div className=' flex flex-col w-full px-2'>
           <span className='text-sm font-bold px-4'>Where</span>
-            <PlacesAutocomplete className="input-area border-none" text="Destination" setSelected={setSelected}/>
+            <PlacesAutocomplete className="input-area border-none" text="Destination" setSelected={setSelected} address={address} setAddress={setAddress}/>
             </div>
           <div className='flex flex-col border-l max-md:border-none w-full px-2'>
           <span className='text-sm font-bold px-4'>Check in</span>
@@ -64,20 +51,21 @@ const NavbarSearch = ({windowWidth, setShowSearch}) => {
           </div>
           <div className='flex flex-col border-l max-md:border-none w-full px-2'> 
           <span className='text-sm font-bold px-4'>Check out</span>
-            <input placeholder='Leaving date' type='text' required className='input-area border-none' onFocus={(e) => (e.target.type = "date")} onChange={(e)=>setCheckOut(e.target.value)} value={checkOut} min={checkIn?checkIn:format(Date.now(),"yyyy-MM-dd")}/>
+            <input placeholder='Leaving date' type='text' required className='input-area border-none' onFocus={(e) => (e.target.type = "date")} onChange={(e)=>setCheckOut(e.target.value)} value={checkOut} min={checkIn?addDaysToStateFormat(checkIn,1):format(Date.now(),"yyyy-MM-dd")}/>
           </div>
           <div className='flex flex-col border-l max-md:border-none w-full px-2'>
           <span className='text-sm font-bold px-4'>Guests</span>
             <input placeholder='Number of guests' type='number' className='border-none' required min={1} value={guests} onChange={(e)=> setGuests(e.target.value)}/>
           </div>
           </div>
-          <button className='bg-primary text-white rounded-full text-center max-md:w-full flex justify-center items-center p-1 w-[5%]' onClick={handleSearch}>
+          <button className='bg-primary text-white rounded-full text-center flex justify-center items-center p-3 ' onClick={handleSearch}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </button>
         </form>
-    </>
+        {!allInputValid && <p className="text-red-800 text-center">All input items must be filled out.</p>}
+    </div>
   )
 }
 

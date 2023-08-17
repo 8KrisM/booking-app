@@ -15,6 +15,7 @@ import Booking from './components/Booking'
 import { useLoadScript } from '@react-google-maps/api'
 import RequireAuth from './components/RequiredAuth'
 import Search from './pages/Search'
+import { SearchContextProvider } from './SearchContext'
 
 axios.defaults.baseURL= import.meta.env.VITE_API_URL
 axios.defaults.withCredentials = true
@@ -31,21 +32,23 @@ const { isLoaded, loadError } = useLoadScript({
 
   return (
     <UserContextProvider>
-    <Routes>
-      <Route path='/' element={<Layout />}> 
-        <Route index element={<IndexPage/>}/>
-        <Route path='/login' element={<Login />}/>
-        <Route path='/register' element={<Register />}/>
-        <Route path='/account' element={<RequireAuth><Account/></RequireAuth>}/> 
-        <Route path='/account/places' element={<RequireAuth><Places/></RequireAuth>}/>  
-        <Route path='/account/places/new' element={<RequireAuth><PlacesForm/></RequireAuth>}/> 
-        <Route path='/account/places/:id' element={<RequireAuth><PlacesForm/></RequireAuth>}/> 
-        <Route path='/place/:id' element={<Place/>}/> 
-        <Route path='/account/bookings' element={<RequireAuth><Bookings/></RequireAuth>}/> 
-        <Route path='/account/bookings/:id' element={<RequireAuth><Booking/></RequireAuth>}/>
-        <Route path='/search' element={<Search/>}/> 
-      </Route>
-    </Routes>
+      <SearchContextProvider>
+        <Routes>
+          <Route path='/' element={<Layout />}> 
+            <Route index element={<IndexPage/>}/>
+            <Route path='/login' element={<Login />}/>
+            <Route path='/register' element={<Register />}/>
+            <Route path='/account' element={<RequireAuth><Account/></RequireAuth>}/> 
+            <Route path='/account/places' element={<RequireAuth><Places/></RequireAuth>}/>  
+            <Route path='/account/places/new' element={<RequireAuth><PlacesForm/></RequireAuth>}/> 
+            <Route path='/account/places/:id' element={<RequireAuth><PlacesForm/></RequireAuth>}/> 
+            <Route path='/place/:id' element={<Place/>}/> 
+            <Route path='/account/bookings' element={<RequireAuth><Bookings/></RequireAuth>}/> 
+            <Route path='/account/bookings/:id' element={<RequireAuth><Booking/></RequireAuth>}/>
+            <Route path='/search' element={<Search/>}/> 
+          </Route>
+        </Routes>
+      </SearchContextProvider>
     </UserContextProvider>
     
   )

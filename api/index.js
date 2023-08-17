@@ -10,6 +10,7 @@ const imageDownloader = require("image-downloader")
 const multer = require("multer")
 const fs = require("fs")
 const Booking = require("./models/Booking")
+const { isBefore, isAfter, startOfDay, endOfDay } = require('date-fns');
 
 
 require('dotenv').config()
@@ -28,7 +29,12 @@ app.use(cors({
 }))
 
 
-mongoose.connect(process.env.MONGO_URL)
+mongoose.connect(process.env.MONGO_URL).then(() => {
+  console.log('Connected to MongoDB');
+})
+.catch(error => {
+  console.error('Error connecting to MongoDB:', error);
+});
 
 function getUserDataFromReq(req){
     return new Promise((resolve, reject)=>{
@@ -210,12 +216,12 @@ app.get('/test', (req,res) => {
   app.post('/places-search', async (req, res) => {
     try {
       const { lat, lng, checkIn, checkOut, guests } = req.body;
-      console.log(req.body);
-      
+  
       const radius = 20;
-      
+  
       const longitudeRange = radius / (111.32 * Math.cos(lat * (Math.PI / 180)));
   
+      // Find places that are within the specified location
       const places = await Place.find({
         lat: {
           $gte: lat - (radius / 111.12),
@@ -224,16 +230,39 @@ app.get('/test', (req,res) => {
         lng: {
           $gte: lng - longitudeRange,
           $lte: lng + longitudeRange
+        },
+        maxGuests:{
+          $gte: guests
         }
       });
   
-      console.log(places);
-      res.json(places);
+      // Find bookings that overlap with the specified check-in and check-out dates
+      const overlappingBookings = await Booking.find({
+        place: { $in: places.map(place => place._id) },
+        $or: [
+          { checkIn: { $lt: checkOut }, checkOut: { $gt: checkIn } },
+          { checkIn: { $gt: checkIn, $lt: checkOut } },
+          { checkOut: { $gt: checkIn, $lt: checkOut } }
+        ]
+      });
+  
+      // Filter out places that have overlapping bookings
+      const availablePlaces = places.filter(place => {
+        const hasOverlap = overlappingBookings.some(booking => booking.place.equals(place._id));
+        return !hasOverlap;
+      });
+      res.json(availablePlaces);
     } catch (error) {
       console.error('Error:', error);
       res.status(500).json({ message: 'Internal Server Error' });
     }
   });
+  
+  
+  
+  
+  
+  
   
 
   app.post('/bookings', async (req,res)=>{
