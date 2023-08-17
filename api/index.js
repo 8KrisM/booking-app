@@ -16,7 +16,7 @@ require('dotenv').config()
 const app = express()
 
 const bcryptSalt = bcrypt.genSaltSync()
-const jwtSecret = 'dafgij5644644fasvcadaswad87'
+const jwtSecret = process.env.JWT_SECRET
 
 app.use(express.json())
 app.use(cookieParser())
