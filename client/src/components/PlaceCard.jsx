@@ -9,7 +9,7 @@ const PlaceCard = ({place}) => {
             <PlaceImg place={place} className='rounded-2xl aspect-square object-cover'/>
           </div>
             <h3 className='font-semibold truncate'>{place.address}</h3>
-            <h2 className='text-sm truncate text-gray-600'>{place.title}</h2>
+            <h2 className='text-sm truncate text-gray-600 dark:text-gray-400'>{place.title}</h2>
             <div className='mt-2'>
               <span className='font-semibold'>${place.price}</span> per night
             </div>

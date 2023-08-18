@@ -30,7 +30,7 @@ const Booking = () => {
     <div className='my-7'>
         <h1 className='text-3xl'>{booking.place.title}</h1>
         <Address place={booking.place}/>
-        <div className='bg-gray-200 p-4 mb-4 rounded-2xl'>
+        <div className='bg-gray-200 dark:bg-darkPick p-4 mb-4 rounded-2xl'>
             <h2 className='text-xl'>Booking informations: </h2>
             <div className='py-3'>
             <div>

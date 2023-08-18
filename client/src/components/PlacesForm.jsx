@@ -76,7 +76,6 @@ const PlacesForm = () => {
 
   return (
     <div>
-        <AccountNav/>
         <form onSubmit={savePlace}>
             {inputHeader("Title")}
             {inputDesc("Title for your place")}

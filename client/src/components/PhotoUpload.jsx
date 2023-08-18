@@ -51,7 +51,7 @@ const PhotoUpload = ({addedPhotos, onChange}) => {
                 value={photoLink}
                 onChange={e=> setPhotoLink(e.target.value)}
                 />
-            <button className="bg-gray-300 px-4 rounded-2xl" onClick={addPhotoByLink}>Add&nbsp;photo</button>
+            <button className="bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 px-4 rounded-2xl" onClick={addPhotoByLink}>Add&nbsp;photo</button>
         </div>
         
         <div className="mt-2 grid gap-2 grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
@@ -78,7 +78,7 @@ const PhotoUpload = ({addedPhotos, onChange}) => {
                     </button>
                 </div>
             ))}
-            <label className="h-32 cursor-pointer flex items-center justify-center border gap-1 bg-slate-100 rounded-xl p-2 text-2xl">
+            <label className="h-32 cursor-pointer flex items-center justify-center border gap-1 bg-slate-100 dark:bg-gray-600 dark:hover:bg-gray-700 dark:border-none rounded-xl p-2 text-2xl">
                 <input type="file" multiple className="hidden" onChange={uploadPhoto} accept="image/*"/>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

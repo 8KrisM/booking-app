@@ -38,7 +38,7 @@ const NavbarSearch = ({setShowSearch}) => {
 
 
     return (
-    <div className='border border-gray-300 rounded-2xl w-full shadow-lg animate-slide-down absolute md:static py-2 px-3 dark:bg-bgDark'>
+    <div className='border border-gray-300 bg-white dark:border-none rounded-2xl w-full shadow-lg animate-slide-down absolute md:static py-2 px-3 dark:bg-darkPick'>
     <form className='flex max-md:flex-col justify-center gap-2 w-full'>
         <div className='flex max-md:flex-col w-full justify-around'>
           <div className=' flex flex-col w-full px-2'>

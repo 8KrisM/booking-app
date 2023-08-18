@@ -46,7 +46,7 @@ const BookingWidget = ({place}) => {
 
   return (
     <div>
-        <div className=' border p-4 rounded-2xl shadow'>
+        <div className='dark:border-gray-700 border p-4 rounded-2xl shadow-xl'>
             <div className='text-xl text-center p-1'>
             <b>Price:</b> ${place.price} / per night
             </div>
@@ -57,13 +57,13 @@ const BookingWidget = ({place}) => {
                         <input className='input-area border' 
                             value={checkIn} type='date' onChange={(e)=>setCheckIn(e.target.value)}/>
                     </div>
-                    <div className=' p-4 md:border-l'>
+                    <div className=' p-4 md:border-l md:dark:border-gray-700'>
                         <label>Check-out: </label>
                         <input className='input-area' 
                             value={checkOut} type='date' onChange={(e)=>setCheckOut(e.target.value)}/>
                     </div>
                 </div>
-                <div className=' p-4  md:border-t'>
+                <div className=' p-4  md:border-t md:dark:border-gray-700'>
                         <label>Guests: </label>
                         <input className='bg-transparent' 
                             value={guests} type='number' min='0' max='50' onChange={(e)=>setGuests(e.target.value)}/>

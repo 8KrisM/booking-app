@@ -17,7 +17,7 @@ import { useEffect } from "react";
 
 export function MapAndSearch({setAddress, address, setSelected, selected}) {
   return (
-    <div className="flex flex-col w-full">  
+    <div className="flex flex-col w-full gap-2">  
         <div className="places-container">
             <PlacesAutocomplete setSelected={setSelected} setAddress={setAddress} addressState={address}/>
         </div>
