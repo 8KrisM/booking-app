@@ -36,8 +36,7 @@ const Account = () => {
 
   return (
     <div>
-        <AccountNav/>
-        <div className="animate-slide-down">
+        <div className="animate-slide-down mt-10">
             {subpage === 'profile' && (
                 <div className='text-center mx-auto'>
                     Logged in as {user.name} <br/>

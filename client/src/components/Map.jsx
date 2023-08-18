@@ -1,4 +1,3 @@
-import { useState, useMemo } from "react";
 import { GoogleMap, useLoadScript, MarkerF, StreetViewService } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -67,7 +66,7 @@ export const PlacesAutocomplete = ({ setSelected,setAddress, addressState='',cla
 
   return (
     <div>
-      <Combobox onSelect={handleSelect} >
+      <Combobox onSelect={handleSelect}>
         <ComboboxInput
           value={value}
           onChange={(e) => setValue(e.target.value)}
@@ -75,11 +74,11 @@ export const PlacesAutocomplete = ({ setSelected,setAddress, addressState='',cla
           className={className}
           placeholder={text}
         />
-        <ComboboxPopover>
-          <ComboboxList>
+        <ComboboxPopover className="dark:bg-bgDark rounded-2xl border-gray-500">
+          <ComboboxList className="">
             {status === "OK" &&
               data.map(({ place_id, description }) => (
-                <ComboboxOption key={place_id} value={description} />
+                <ComboboxOption key={place_id} value={description} className="hover:dark:bg-darkPick dark:text-darkText my-2"/>
               ))}
           </ComboboxList>
         </ComboboxPopover>

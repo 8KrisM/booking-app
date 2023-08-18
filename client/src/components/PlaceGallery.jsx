@@ -6,10 +6,10 @@ const PlaceGallery = ({place}) => {
 
     if(showAllPhotos){
         return (
-            <div className='absolute inset-0 bg-white min-h-screen p-8 grid gap-4'>
+            <div className='fixed inset-0 bg-white dark:bg-bgDark h-full w-full p-8 grid gap-4 z-10 overflow-auto'>
                 <div>
                     <h2 className='text-2xl mr-40'>Photos of {place.title}</h2>
-                    <button className='flex gap-1 right-10 fixed bg-gray-100 hover:bg-gray-300 rounded-2xl p-2 shadow-md top-8' onClick={()=>setShowAllPhotos(false)}>
+                    <button className='flex gap-1 right-10 fixed bg-gray-100 dark:bg-darkPick hover:bg-gray-300 rounded-2xl p-2 shadow-md top-8' onClick={()=>setShowAllPhotos(false)}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                         <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clipRule="evenodd" />
                         </svg>

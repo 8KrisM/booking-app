@@ -38,7 +38,7 @@ const NavbarSearch = ({setShowSearch}) => {
 
 
     return (
-    <div className='border border-gray-300 rounded-2xl w-full shadow-lg animate-slide-down absolute md:static bg-white py-2 px-3'>
+    <div className='border border-gray-300 rounded-2xl w-full shadow-lg animate-slide-down absolute md:static py-2 px-3 dark:bg-bgDark'>
     <form className='flex max-md:flex-col justify-center gap-2 w-full'>
         <div className='flex max-md:flex-col w-full justify-around'>
           <div className=' flex flex-col w-full px-2'>
@@ -58,7 +58,7 @@ const NavbarSearch = ({setShowSearch}) => {
             <input placeholder='Number of guests' type='number' className='border-none' required min={1} value={guests} onChange={(e)=> setGuests(e.target.value)}/>
           </div>
           </div>
-          <button className='bg-primary text-white rounded-full text-center flex justify-center items-center p-3 ' onClick={handleSearch}>
+          <button className='bg-primary text-white rounded-full h-10 md:h-16 w-full md:w-16 flex justify-center items-center' onClick={handleSearch}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>

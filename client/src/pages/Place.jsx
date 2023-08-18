@@ -23,7 +23,7 @@ const Place = () => {
 
 
   return (
-    <div className='mt-5 bg-gray-50 -m-6 px-6 pt-6'>
+    <div className='mt-5 -m-6 px-6 pt-6 dark:bg-darkPick'>
         <h1 className='text-2xl'>
             {place.title}
         </h1>
@@ -43,11 +43,11 @@ const Place = () => {
             </div>
             <BookingWidget place={place}/>
         </div>
-        <div className="bg-white -mx-6 px-6 py-8 border-t">
+        <div className="bg-white dark:bg-bgDark -mx-6 px-6 py-8 border-t dark:border-none">
             <div>
                 <h2 className='font-semibold text-2xl'>Extra info</h2>
             </div>
-            <div className='mb-2 mt-2 text-sm text-gray-600 leading-5'>
+            <div className='mb-2 mt-2 text-sm leading-5'>
                     {place.extraInfo}
             </div>
         </div>

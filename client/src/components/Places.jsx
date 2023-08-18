@@ -14,8 +14,7 @@ const Places = () => {
 
   return (
     <div>
-        <AccountNav/>
-        <div className="animate-slide-down">
+        <div className="animate-slide-down mt-10">
             <div className="text-center">
 
                 <Link className="bg-primary text-white rounded-full py-2 px-6 text-center" to='/account/places/new'> 
@@ -24,8 +23,8 @@ const Places = () => {
             </div>
             <div className="mt-4">
                 {places.length>0&& places.map(place=>(
-                    <Link to={'/account/places/'+place._id} key={place._id} className="flex mt-5 cursor-pointer gap-4 bg-gray-100 p-3 rounded-2xl">
-                        <div className="flex w-32 h-32 bg-gray-200 rounded-xl shrink-0">
+                    <Link to={'/account/places/'+place._id} key={place._id} className="flex mt-5 cursor-pointer gap-4 bg-gray-100 dark:bg-darkPick p-3 rounded-2xl">
+                        <div className="flex w-32 h-32 rounded-xl shrink-0">
                             <PlaceImg place={place}/>
                         </div>
                         <div className="grow-0 shrink mr-2 truncate">

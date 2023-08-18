@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import AccountNav from './AccountNav'
 import axios from 'axios'
 import PlaceImg from './PlaceImg'
 import { differenceInCalendarDays, format } from 'date-fns'
@@ -16,10 +15,9 @@ const Bookings = () => {
 
   return (
     <div>
-        <AccountNav />
-        <div className='flex flex-col justify-center items-center animate-slide-down'>
+        <div className='flex flex-col justify-center items-center animate-slide-down mt-10'>
             {bookings?.length > 0 && bookings.map((booking)=>(
-                <Link key={booking._id} to={'/account/bookings/'+booking._id} className='flex flex-col md:flex-row gap-4 bg-gray-100 rounded-2xl overflow-hidden w-[90%] p-2 mb-3'>
+                <Link key={booking._id} to={'/account/bookings/'+booking._id} className='flex flex-col md:flex-row gap-4 bg-gray-100 dark:bg-darkPick rounded-2xl overflow-hidden w-[90%] p-2 mb-3'>
                     <div className='hover:bg-gray-500 rounded-2xl flex justify-center w-full md:w-48'>
                         <PlaceImg className= 'rounded-2xl' place={booking.place}/>
                     </div>

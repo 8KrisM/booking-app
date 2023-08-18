@@ -7,10 +7,15 @@ export default {
   theme: {
     extend: {
       colors:{
-        primary: '#009E83'
+        primary: '#009E83',
+        bgDark: '#1a1625',
+        bgLight: '#ffffff',
+        darkText: '#F2F2F2',
+        darkPick: '#1f1f33',
       }
     },
   },
   plugins: [],
+  darkMode: 'class',
 }
 

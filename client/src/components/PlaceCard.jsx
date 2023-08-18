@@ -4,7 +4,7 @@ import PlaceImg from './PlaceImg'
 
 const PlaceCard = ({place}) => {
   return (
-    <Link to={'/place/'+place._id} key={place.title} className='hover:bg-gray-100 hover:scale-105 hover:p-1  cursor-pointer rounded-2xl'>
+    <Link to={'/place/'+place._id} key={place.title} className='hover:bg-gray-100 dark:hover:bg-darkPick hover:scale-105 hover:p-1  cursor-pointer rounded-2xl'>
           <div className='hover:bg-gray-500 rounded-2xl mb-2 flex justify-center w-full'>
             <PlaceImg place={place} className='rounded-2xl aspect-square object-cover'/>
           </div>

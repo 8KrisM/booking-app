@@ -2,14 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+
 input[type="text"], input[type="password"], 
 input[type="email"],input[type="number"],
 input[type="tel"], textarea, .input-area{
-  @apply w-full border my-1 py-2 px-4 rounded-2xl
+  @apply w-full border my-1 py-2 px-4 rounded-2xl dark:bg-bgDark
 }
 
+
 textarea{
-  height: 130px
+  @apply h-[130px]
 }
 
 button.primary{
@@ -42,3 +44,12 @@ button.primary{
 .animate-slide-down {
   animation: slideDown 0.5s ease-out;
 }
+
+.animate-slide-down-leave {
+  animation: slideDown 0.5s ease-out;
+  animation-direction: reverse;
+
+}
+
+
+

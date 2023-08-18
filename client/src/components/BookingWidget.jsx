@@ -54,22 +54,22 @@ const BookingWidget = ({place}) => {
                 <div className='flex flex-col md:flex-row'>
                     <div className=' p-4 rounded-2xl'>
                         <label>Check-in: </label>
-                        <input className='bg-transparent border border-gray-200 rounded-2xl p-0.5' 
+                        <input className='input-area border' 
                             value={checkIn} type='date' onChange={(e)=>setCheckIn(e.target.value)}/>
                     </div>
-                    <div className=' p-4  rounded-2xl border-l'>
+                    <div className=' p-4 md:border-l'>
                         <label>Check-out: </label>
-                        <input className='bg-transparent border border-gray-200 rounded-2xl p-0.5' 
+                        <input className='input-area' 
                             value={checkOut} type='date' onChange={(e)=>setCheckOut(e.target.value)}/>
                     </div>
                 </div>
-                <div className=' p-4  rounded-2xl border-t'>
+                <div className=' p-4  md:border-t'>
                         <label>Guests: </label>
                         <input className='bg-transparent' 
                             value={guests} type='number' min='0' max='50' onChange={(e)=>setGuests(e.target.value)}/>
                 </div>
                 {numberOfDays > 0 && (
-                    <div className=' p-4  rounded-2xl border-t'>
+                    <div className=' p-4  md:border-t'>
                     <label>Full name: </label>
                     <input className='bg-transparent' 
                         value={name} type='text' placeholder='Name' onChange={(e)=>setName(e.target.value)}/>
