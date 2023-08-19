@@ -28,7 +28,6 @@ const { isLoaded, loadError } = useLoadScript({
     libraries: ["places"],
     language: 'en'
   });
-  if(!isLoaded&&!loadError) return "Loading"
 
   return (
     <UserContextProvider>

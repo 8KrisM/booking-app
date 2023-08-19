@@ -51,5 +51,46 @@ button.primary{
 
 }
 
+.darkmode-checkbox {
+  @apply h-8;
+  content:"darkmode";
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 60px;
+  border-radius: 30px;
+  background-color: #333;
+  position: relative;
+  transition: all 0.5s ease-in;
+  cursor: pointer;
+  z-index: 1;
+}
 
 
+.darkmode-checkbox::before {
+  content: "";
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #EEE;
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+  transition: all 0.5s ease-in;
+}
+
+
+.darkmode-checkbox:checked {
+  background: #dddddd;
+}
+
+
+.darkmode-checkbox:checked::before {
+  background: #333;
+  left: 32px;
+}
+
+.user-nav-menu-button{
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-2 flex flex-col text-center items-center rounded-2xl
+}
