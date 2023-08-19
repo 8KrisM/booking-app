@@ -28,6 +28,8 @@ const PlacesForm = () => {
     const [price, setPrice] = useState(100)
     const [redirect, setRedirect] = useState(false)
 
+    console.log(checkIn)
+
     useEffect(()=>{
         if(!id) return
         axios.get('/places/'+id).then(response=>{
@@ -118,19 +120,21 @@ const PlacesForm = () => {
                 <div>
                     <h3 className="mt-2 -mb-1">Check in time</h3>
                     <input 
-                        type="text" 
+                        type="time" 
                         placeholder="14:00"
                         value={checkIn} 
                         onChange={e => setCheckIn(e.target.value)}
+                        className='input-area'
                         required
                         />
                 </div>
                 <div>
                     <h3 className="mt-2 -mb-1">Check out time</h3>
                     <input 
-                        type="text" 
+                        type="time" 
                         placeholder="10:00"
                         value={checkOut} 
+                        className='input-area'
                         onChange={e => setCheckOut(e.target.value)}
                         required
                         />
