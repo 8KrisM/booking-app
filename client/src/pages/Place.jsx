@@ -36,8 +36,8 @@ const Place = () => {
                     <h2 className='font-semibold text-2xl'>Description</h2>
                     {place.description}
                 </div>
-                <b>Check-in: </b>{place.checkIn}:00<br/>
-                <b>Check-out: </b>{place.checkOut}:00<br/>
+                <b>Check-in: </b>{place.checkIn}<br/>
+                <b>Check-out: </b>{place.checkOut}<br/>
                 <b>Max guests: </b>{place.maxGuests}
                 
             </div>

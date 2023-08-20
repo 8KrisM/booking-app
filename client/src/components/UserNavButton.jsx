@@ -32,13 +32,14 @@ const UserNavButton = () => {
         <div className="relative"
             onMouseLeave={()=>setShowDropdown(false)}
             onClick={navigateToLogin} >
-            <div className='flex items-center border gap-2 border-gray-300 rounded-2xl py-2 px-3 shadow-lg hover:cursor-pointer' onClick={()=>setShowDropdown(prev=>!prev)}>
+            <div className={`${showDropdown&&user?"w-[280px] border-none rounded-t-2xl rounded-b-none bg-white dark:bg-darkPick":""} flex right-0 absolute -top-4 justify-center items-center border gap-2 border-gray-300 rounded-2xl py-1 px-3 shadow-lg hover:cursor-pointer`} 
+            onClick={()=>setShowDropdown(prev=>!prev)}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
                 {!!user ? 
                     <div className="truncate">
-                        {user.name}
+                        {user.name.trim().split(' ')[0]}
                     </div>
                     :<div>
                         Login
@@ -46,7 +47,7 @@ const UserNavButton = () => {
             }
             </div>
             {showDropdown&& user &&
-                <div className={"absolute top-full right-0 z-10 bg-white dark:bg-darkPick py-3 border dark:border-none rounded-2xl animate-slide-down shadow-xl w-[300px]"}>
+                <div className={"absolute top-3 right-0 z-10 bg-white dark:bg-darkPick py-3 rounded-b-2xl shadow-xl w-[280px]"}>
                         <div className="grid grid-cols-2 gap-3 px-3">
                             <div className="user-nav-menu-button hover:bg-transparent hover:dark:bg-transparent ">
                                 <input type="checkbox" className="darkmode-checkbox" checked={darkmode} onChange={handleDarkmode}/>

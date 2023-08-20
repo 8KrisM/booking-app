@@ -28,7 +28,6 @@ const PlacesForm = () => {
     const [price, setPrice] = useState(100)
     const [redirect, setRedirect] = useState(false)
 
-    console.log(checkIn)
 
     useEffect(()=>{
         if(!id) return

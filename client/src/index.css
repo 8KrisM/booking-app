@@ -45,6 +45,23 @@ button.primary{
   animation: slideDown 0.5s ease-out;
 }
 
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+
+.animate-slide-left {
+  animation: slideLeft 0.5s ease-out;
+}
+
 .animate-slide-down-leave {
   animation: slideDown 0.5s ease-out;
   animation-direction: reverse;

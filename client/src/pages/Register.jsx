@@ -24,7 +24,7 @@ const Register = () => {
     } 
   return (
     <div className='mt-4 grow flex items-center justify-around'>
-        <div className='-mt-60'>
+        <div className='-mt-32'>
             <h1 className='text-4xl text-center mb-4'>Register</h1>
             <form className='max-w-md mx-auto' onSubmit={registerUser}>
                 <input type='text' placeholder='Name' 
