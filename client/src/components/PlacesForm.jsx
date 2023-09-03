@@ -1,16 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import PhotoUpload from './PhotoUpload'
 import Perks from './Perks'
-import AccountNav from './AccountNav'
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import {MapAndSearch} from './Map'
+import { UserContext } from '../UserContext'
 
 
 
 
 const PlacesForm = () => {
+    const {user} = useContext(UserContext);
+
+    const navigator = useNavigate();
+
     const {id} = useParams()
     const [title, setTitle] = useState('')
     const [address, setAddress] = useState('')
@@ -33,6 +37,10 @@ const PlacesForm = () => {
         if(!id) return
         axios.get('/places/'+id).then(response=>{
             const {data} = response
+            if(data.owner!==user._id) {
+                console.log("uhm excuse me what are u doing in my house?");
+                navigator("/")
+            }
             setTitle(data.title)
             setAddress(data.address)
             setAddedPhotos(data.photos)

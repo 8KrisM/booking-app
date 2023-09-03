@@ -12,6 +12,8 @@ const UserNavButton = () => {
 
     const handleDarkmode = () =>{
         setDarkmode(prev=>!prev)
+        if(darkmode)localStorage.theme = "light";
+        else localStorage.theme = "dark";
     }
 
     useEffect(()=>{
@@ -39,7 +41,7 @@ const UserNavButton = () => {
                 </svg>
                 {!!user ? 
                     <div className="truncate">
-                        {user.name.trim().split(' ')[0]}
+                        {user?.name?.trim().split(' ')[0]}
                     </div>
                     :<div>
                         Login

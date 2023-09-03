@@ -18,7 +18,7 @@ const Place = () => {
     },[id])
 
     if(!place){
-        return 'Loading'
+        return "";
     }
 
 

@@ -16,7 +16,7 @@ const PlaceGallery = ({place}) => {
                         Close</button>
                 </div>
                 {place?.photos?.length >0 && place.photos.map((photo)=>(
-                    <div className='flex justify-center'>
+                    <div key={photo} className='flex justify-center'>
                         <PlaceImg place={{photos: [photo]}} className='max-w-l'/>
                       
                     </div>

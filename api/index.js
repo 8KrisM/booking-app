@@ -10,7 +10,6 @@ const imageDownloader = require("image-downloader")
 const multer = require("multer")
 const fs = require("fs")
 const Booking = require("./models/Booking")
-const { isBefore, isAfter, startOfDay, endOfDay } = require('date-fns');
 
 
 require('dotenv').config()
@@ -25,7 +24,7 @@ app.use('/uploads', express.static(__dirname + '/uploads'))
 
 app.use(cors({
     credentials: true,
-    origin: process.env.CLIENT_URL
+    origin: [process.env.CLIENT_URL, "http://localhost:5173"]
 }))
 
 
@@ -46,12 +45,10 @@ function getUserDataFromReq(req){
   }
 
 app.get('/test', (req,res) => {
-    mongoose.connect(process.env.MONGO_URL);
     res.json('test ok');
   });
   
   app.post('/register', async (req,res) => {
-    mongoose.connect(process.env.MONGO_URL);
     const {name,email,password} = req.body;
   
     try {
@@ -69,7 +66,6 @@ app.get('/test', (req,res) => {
   });
   
   app.post('/login', async (req,res) => {
-    mongoose.connect(process.env.MONGO_URL);
     const {email,password} = req.body;
     const userDoc = await User.findOne({email});
     if (userDoc) {
@@ -86,12 +82,11 @@ app.get('/test', (req,res) => {
         res.status(422).json('pass not ok');
       }
     } else {
-      res.json('not found');
+      res.status(401).json('user not found');
     }
   });
   
   app.get('/profile', (req,res) => {
-    mongoose.connect(process.env.MONGO_URL);
     const {token} = req.cookies;
     if (token) {
       jwt.verify(token, jwtSecret, {}, async (err, userData) => {
@@ -152,7 +147,6 @@ app.get('/test', (req,res) => {
 });
 
   app.post('/places', (req,res)=>{
-    mongoose.connect(process.env.MONGO_URL)
     const {token} = req.cookies
     const {title, address, lat,lng,addedPhotos, 
         description, perks, extraInfo, 
@@ -170,7 +164,6 @@ app.get('/test', (req,res) => {
   })
 
   app.get('/user-places', async(req,res)=>{
-    mongoose.connect(process.env.MONGO_URL)
     try {
       const userData = await getUserDataFromReq(req)
       const {id} = userData
@@ -182,13 +175,11 @@ app.get('/test', (req,res) => {
   })
 
   app.get('/places/:id', async(req,res)=>{
-    mongoose.connect(process.env.MONGO_URL);
     const {id} = req.params
     res.json(await Place.findById(id))
   })
 
   app.put('/places', async (req,res)=>{
-    mongoose.connect(process.env.MONGO_URL);
     const {token} = req.cookies
     const {id, title, address,lat,lng, addedPhotos, 
         description, perks, extraInfo, 
@@ -209,7 +200,6 @@ app.get('/test', (req,res) => {
   })
 
   app.get('/places', async (req,res)=>{
-    mongoose.connect(process.env.MONGO_URL);
     res.json(await Place.find())
   })
 
@@ -266,7 +256,6 @@ app.get('/test', (req,res) => {
   
 
   app.post('/bookings', async (req,res)=>{
-    mongoose.connect(process.env.MONGO_URL);
     try {
       const userData = await getUserDataFromReq(req)
       const {place, checkIn, checkOut,
@@ -285,10 +274,13 @@ app.get('/test', (req,res) => {
 
 
   app.get('/bookings', async (req, res)=>{
-    mongoose.connect(process.env.MONGO_URL);
-    const userData  = await getUserDataFromReq(req)
-    res.json(await Booking.find({user: userData.id}).populate('place'))
-
+    try{
+      const userData  = await getUserDataFromReq(req);
+      res.json(await Booking.find({user: userData.id}).populate('place'));
+    }
+    catch(err){
+      res.status(401).json("No user");
+    }
   })
 
 app.listen(4000)

@@ -15,7 +15,6 @@ const Login = () => {
             const {data} = await axios.post('/login', {email, password})
             setUser(data)
             setRedirect(true)
-
         } catch (error) {
             console.log(error)
             alert('Login failed.')

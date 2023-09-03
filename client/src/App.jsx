@@ -20,7 +20,6 @@ import { SearchContextProvider } from './SearchContext'
 axios.defaults.baseURL= import.meta.env.VITE_API_URL
 axios.defaults.withCredentials = true
 
-
 function App() {
 
 const { isLoaded, loadError } = useLoadScript({

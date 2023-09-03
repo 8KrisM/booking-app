@@ -9,6 +9,7 @@ export function UserContextProvider({children}) {
   const [user,setUser] = useState(null);
   const [ready,setReady] = useState(false);
   const [redirect, setRedirect] = useState(null)
+  
   useEffect(() => {
     if (!user) {
       axios.get('/profile').then(({data}) => {
@@ -26,12 +27,12 @@ export function UserContextProvider({children}) {
   }
   
   if(!ready){
-      return 'Loading...'
+      return ''
   }
 
-  /*if(redirect){
+  if(redirect){
     <Navigate to={redirect}/>
-  }*/
+  }
 
 
 
